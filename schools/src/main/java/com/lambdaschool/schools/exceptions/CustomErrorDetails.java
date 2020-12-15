@@ -21,7 +21,6 @@ public class CustomErrorDetails extends DefaultErrorAttributes
 		Map<String, Object> errorDetails = new LinkedHashMap<>();
 		
 		errorDetails.put("title", errorAttribs.get("error"));
-//		errorDetails.put("title", "ERRORERRORERROR");
 		errorDetails.put("status", errorAttribs.get("status"));
 		errorDetails.put("detail", errorAttribs.get("message"));
 		errorDetails.put("timestamp", errorAttribs.get("timestamp"));
