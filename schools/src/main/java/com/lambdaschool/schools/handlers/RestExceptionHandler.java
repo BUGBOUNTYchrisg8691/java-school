@@ -1,5 +1,6 @@
 package com.lambdaschool.schools.handlers;
 
+import com.lambdaschool.schools.exceptions.ResourceFoundException;
 import com.lambdaschool.schools.exceptions.ResourceNotFoundException;
 import com.lambdaschool.schools.models.ErrorDetail;
 import com.lambdaschool.schools.services.HelperFunctions;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import java.util.Date;
 
+import static org.springframework.http.HttpStatus.FOUND;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @Order(Ordered.HIGHEST_PRECEDENCE)
@@ -38,11 +40,26 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler
 		errorDetail.setTimestamp(new Date());
 		errorDetail.setTitle("Resource Not Found");
 		errorDetail.setStatus(NOT_FOUND.value());
-		errorDetail.setDeveloperMessage(rnfe.getClass().getName());
 		errorDetail.setDetail(rnfe.getMessage());
+		errorDetail.setDeveloperMessage(rnfe.getClass().getName());
 		errorDetail.setErrors(helperFunctions.getConstraintViolation(rnfe));
 		
-		return new ResponseEntity<>(errorDetail, NOT_FOUND);
+		return new ResponseEntity<>(errorDetail, null, NOT_FOUND);
+	}
+	
+	@ExceptionHandler(ResourceFoundException.class)
+	public ResponseEntity<?> handleResourceFoundException(ResourceFoundException rfe)
+	{
+		ErrorDetail errorDetail = new ErrorDetail();
+		
+		errorDetail.setTimestamp(new Date());
+		errorDetail.setTitle("Resource Found");
+		errorDetail.setStatus(FOUND.value());
+		errorDetail.setDetail(rfe.getMessage());
+		errorDetail.setDeveloperMessage(rfe.getClass().getName());
+		errorDetail.setErrors(helperFunctions.getConstraintViolation(rfe));
+		
+		return new ResponseEntity<>(errorDetail, null, FOUND);
 	}
 	
 	@Override protected ResponseEntity<Object> handleExceptionInternal(Exception ex, Object body, HttpHeaders headers,
@@ -57,6 +74,6 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler
 		errorDetail.setDeveloperMessage(ex.getClass().getName());
 		errorDetail.setErrors(helperFunctions.getConstraintViolation(ex));
 		
-		return new ResponseEntity<>(errorDetail, status);
+		return new ResponseEntity<>(errorDetail, null, status);
 	}
 }
