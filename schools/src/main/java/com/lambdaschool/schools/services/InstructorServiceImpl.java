@@ -6,9 +6,15 @@ import com.lambdaschool.schools.repositories.InstructorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * The type Instructor service.
+ */
 @Service(value = "instructorService")
 public class InstructorServiceImpl implements InstructorService
 {
+	/**
+	 * The Instructrepos.
+	 */
 	@Autowired
 	InstructorRepository instructrepos;
 	

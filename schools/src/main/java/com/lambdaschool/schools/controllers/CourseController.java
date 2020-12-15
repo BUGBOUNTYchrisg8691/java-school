@@ -26,13 +26,13 @@ public class CourseController
      */
     @Autowired
     private CoursesService coursesService;
-
+    
     /**
      * Returns a list of all courses
      * <br>Example: <a href="http://localhost:2019/courses/courses">http://localhost:2019/courses/courses</a>
      *
      * @return JSON list of all courses with a status of OK
-     * @see CoursesService#findAll() CoursesService.findAll()
+     * @see CoursesService#findAll() CoursesService#findAll()CoursesService.findAll()
      */
     @GetMapping(value = "/courses",
         produces = {"application/json"})
@@ -42,14 +42,14 @@ public class CourseController
         return new ResponseEntity<>(myCourses,
             HttpStatus.OK);
     }
-
+    
     /**
      * Returns a single course based off a course id number
      * <br>Example: <a href="http://localhost:2019/courses/course/7">http://localhost:2019/courses/course/7</a>
      *
      * @param courseId The primary key of the course you seek
      * @return JSON object of the course you seek
-     * @see CoursesService#findCourseById(long) CoursesService.findCourseById(long)
+     * @see CoursesService#findCourseById(long) CoursesService#findCourseById(long)CoursesService.findCourseById(long)
      */
     @GetMapping(value = "/course/{courseId}",
         produces = {"application/json"})
@@ -61,17 +61,16 @@ public class CourseController
         return new ResponseEntity<>(u,
             HttpStatus.OK);
     }
-
+    
     /**
      * Given a complete Course Object, create a new Course record and student course records.
      * <br> Example: <a href="http://localhost:2019/courses/course">http://localhost:2019/courses/course</a>
      *
-     * @param newcourse A complete new course to add including instructor and students.
-     *                  instructor must already exist.
-     *                  students must already exist.
+     * @param newcourse A complete new course to add including instructor and students.                  instructor must
+     *                  already exist.                  students must already exist.
      * @return A location header with the URI to the newly created course and a status of CREATED
      * @throws URISyntaxException Exception if something does not work in creating the location header
-     * @see CoursesService#save(Course) CoursesService.save(Course)
+     * @see CoursesService#save(Course) CoursesService#save(Course)CoursesService.save(Course)
      */
     @PostMapping(value = "/course",
         consumes = {"application/json"})
@@ -96,17 +95,16 @@ public class CourseController
             responseHeaders,
             HttpStatus.CREATED);
     }
-
+    
     /**
-     * Given a complete Course Object
-     * Given the course id, primary key, is in the Course table,
-     * replace the Course record, student course combinations.
+     * Given a complete Course Object Given the course id, primary key, is in the Course table, replace the Course
+     * record, student course combinations.
      * <br> Example: <a href="http://localhost:2019/courses/course/15">http://localhost:2019/courses/course/15</a>
      *
      * @param updateCourse A complete Course including all students. Students and Instructor must already exist.
      * @param courseid     The primary key of the course you wish to replace.
      * @return status of OK
-     * @see CoursesService#save(Course) CoursesService.save(Course)
+     * @see CoursesService#save(Course) CoursesService#save(Course)CoursesService.save(Course)
      */
     @PutMapping(value = "/course/{courseid}",
         consumes = {"application/json"})
@@ -122,14 +120,14 @@ public class CourseController
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
+    
     /**
      * Deletes a given course along with associated student course enrollments
      * <br>Example: <a href="http://localhost:2019/courses/course/14">http://localhost:2019/courses/courses/14</a>
      *
      * @param id the primary key of the course you wish to delete
      * @return Status of OK
-     * @see CoursesService#delete(long) CoursesService.delete(long)
+     * @see CoursesService#delete(long) CoursesService#delete(long)CoursesService.delete(long)
      */
     @DeleteMapping(value = "/course/{id}")
     public ResponseEntity<?> deleteCourseById(

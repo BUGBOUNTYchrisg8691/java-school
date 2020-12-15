@@ -15,16 +15,32 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+/**
+ * The type Instructor controller.
+ */
 @RestController
 @RequestMapping("/instructors")
 public class InstructorController
 {
+	/**
+	 * The Instructor service.
+	 */
 	@Autowired
 	InstructorService instructorService;
 	
+	/**
+	 * The Helper functions.
+	 */
 	@Autowired
 	HelperFunctions helperFunctions;
 	
+	/**
+	 * Gets instructor by id.
+	 *
+	 * @param id         the id
+	 * @param searchTerm the search term
+	 * @return the instructor by id
+	 */
 	@GetMapping(value = "/instructor/{id}/advice/{searchTerm}", produces = "application/json")
 	public ResponseEntity<?> getInstructorById(@PathVariable long id, @PathVariable String searchTerm)
 	{

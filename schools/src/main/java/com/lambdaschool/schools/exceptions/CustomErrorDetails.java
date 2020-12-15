@@ -9,9 +9,15 @@ import org.springframework.web.context.request.WebRequest;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+/**
+ * The type Custom error details.
+ */
 @Component
 public class CustomErrorDetails extends DefaultErrorAttributes
 {
+	/**
+	 * The Helper functions.
+	 */
 	@Autowired
 	HelperFunctions helperFunctions;
 	

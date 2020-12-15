@@ -39,17 +39,16 @@ public class Instructor
         allowSetters = true)
     private List<Course> courses = new ArrayList<>();
     
-    @Transient
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String advice;
-
+    
     /**
      * Default Constructor used primarily by the JPA.
      */
     public Instructor()
     {
     }
-
+    
     /**
      * Given the name of instructor, add them
      *
@@ -60,7 +59,7 @@ public class Instructor
     {
         this.name = name;
     }
-
+    
     /**
      * Getter for the instructor id
      *
@@ -70,7 +69,7 @@ public class Instructor
     {
         return instructorid;
     }
-
+    
     /**
      * Setter for the instructor id
      *
@@ -80,7 +79,7 @@ public class Instructor
     {
         this.instructorid = instructorid;
     }
-
+    
     /**
      * the instructor name
      *
@@ -90,7 +89,7 @@ public class Instructor
     {
         return name;
     }
-
+    
     /**
      * Setter for the instructor name
      *
@@ -100,7 +99,7 @@ public class Instructor
     {
         this.name = name;
     }
-
+    
     /**
      * Getter for courses
      *
@@ -110,7 +109,7 @@ public class Instructor
     {
         return courses;
     }
-
+    
     /**
      * Setter for courses
      *
@@ -121,11 +120,21 @@ public class Instructor
         this.courses = courses;
     }
     
+    /**
+     * Gets advice.
+     *
+     * @return the advice
+     */
     public String getAdvice()
     {
         return advice;
     }
     
+    /**
+     * Sets advice.
+     *
+     * @param advice the advice
+     */
     public void setAdvice(String advice)
     {
         this.advice = advice;

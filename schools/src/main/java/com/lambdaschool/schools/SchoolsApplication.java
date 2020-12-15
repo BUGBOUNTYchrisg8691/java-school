@@ -29,19 +29,6 @@ public class SchoolsApplication
      */
     public static void main(String[] args)
     {
-        RestTemplate restTemplate = new RestTemplate();
-        MappingJackson2HttpMessageConverter conv = new MappingJackson2HttpMessageConverter();
-        conv.setSupportedMediaTypes(Collections.singletonList(MediaType.ALL));
-        restTemplate.getMessageConverters().add(conv);
-        
-        String reqUrl = "https://api.adviceslip.com/advice/search/dog";
-        ParameterizedTypeReference<Advice> respType =new ParameterizedTypeReference<Advice>() {};
-    
-        ResponseEntity<Advice> respEnt = restTemplate.exchange(reqUrl, HttpMethod.GET, null, respType);
-        
-        Advice theAdvice = respEnt.getBody();
-        System.out.println(theAdvice);
-        
         SpringApplication.run(SchoolsApplication.class,
             args);
     }

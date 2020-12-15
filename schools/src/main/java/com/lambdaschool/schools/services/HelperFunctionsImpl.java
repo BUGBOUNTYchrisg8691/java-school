@@ -17,6 +17,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * The type Helper functions.
+ */
 @Service(value = "helperFunctions")
 public class HelperFunctionsImpl implements HelperFunctions
 {

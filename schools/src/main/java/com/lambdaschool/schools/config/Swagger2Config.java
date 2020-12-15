@@ -14,12 +14,20 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import static springfox.documentation.builders.PathSelectors.regex;
 
+/**
+ * The type Swagger 2 config.
+ */
 @EnableSwagger2
 @Configuration
 @Import(BeanValidatorPluginsConfiguration.class)
 public class Swagger2Config
 {
 	
+	/**
+	 * Api docket.
+	 *
+	 * @return the docket
+	 */
 	@Bean
 	public Docket api()
 	{

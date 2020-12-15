@@ -20,6 +20,9 @@ import java.util.Date;
 import static org.springframework.http.HttpStatus.FOUND;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
+/**
+ * The type Rest exception handler.
+ */
 @Order(Ordered.HIGHEST_PRECEDENCE)
 @RestControllerAdvice
 public class RestExceptionHandler extends ResponseEntityExceptionHandler
@@ -27,11 +30,20 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler
 	@Autowired
 	private HelperFunctions helperFunctions;
 	
+	/**
+	 * Instantiates a new Rest exception handler.
+	 */
 	public RestExceptionHandler()
 	{
 		super();
 	}
 	
+	/**
+	 * Handle resource not found exception response entity.
+	 *
+	 * @param rnfe the rnfe
+	 * @return the response entity
+	 */
 	@ExceptionHandler(ResourceNotFoundException.class)
 	public ResponseEntity<?> handleResourceNotFoundException(ResourceNotFoundException rnfe)
 	{
@@ -47,6 +59,12 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler
 		return new ResponseEntity<>(errorDetail, null, NOT_FOUND);
 	}
 	
+	/**
+	 * Handle resource found exception response entity.
+	 *
+	 * @param rfe the rfe
+	 * @return the response entity
+	 */
 	@ExceptionHandler(ResourceFoundException.class)
 	public ResponseEntity<?> handleResourceFoundException(ResourceFoundException rfe)
 	{
