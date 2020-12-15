@@ -1,6 +1,7 @@
 package com.lambdaschool.schools.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -39,6 +40,7 @@ public class Instructor
     private List<Course> courses = new ArrayList<>();
     
     @Transient
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String advice;
 
     /**
