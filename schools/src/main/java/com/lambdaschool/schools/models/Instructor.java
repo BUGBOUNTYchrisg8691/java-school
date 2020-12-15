@@ -1,6 +1,7 @@
 package com.lambdaschool.schools.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -37,6 +38,10 @@ public class Instructor
     @JsonIgnoreProperties(value = "instructor",
         allowSetters = true)
     private List<Course> courses = new ArrayList<>();
+    
+    @Transient
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private String advice;
 
     /**
      * Default Constructor used primarily by the JPA.
@@ -114,5 +119,15 @@ public class Instructor
     public void setCourses(List<Course> courses)
     {
         this.courses = courses;
+    }
+    
+    public String getAdvice()
+    {
+        return advice;
+    }
+    
+    public void setAdvice(String advice)
+    {
+        this.advice = advice;
     }
 }

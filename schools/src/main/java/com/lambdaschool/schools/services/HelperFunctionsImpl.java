@@ -1,12 +1,20 @@
 package com.lambdaschool.schools.services;
 
+import com.lambdaschool.schools.models.Advice;
 import com.lambdaschool.schools.models.ValidationError;
 import org.hibernate.exception.ConstraintViolationException;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service(value = "helperFunctions")
@@ -51,5 +59,22 @@ public class HelperFunctionsImpl implements HelperFunctions
 			}
 		}
 		return veList;
+	}
+	
+	@Override public Advice getAdvicePerInstructor(String searchTerm)
+	{
+		RestTemplate restTemplate = new RestTemplate();
+		MappingJackson2HttpMessageConverter conv = new MappingJackson2HttpMessageConverter();
+		conv.setSupportedMediaTypes(Collections.singletonList(MediaType.ALL));
+		restTemplate.getMessageConverters().add(conv);
+		
+		String reqUrl = "https://api.adviceslip.com/advice/search/" + searchTerm;
+		ParameterizedTypeReference<Advice> respType = new ParameterizedTypeReference<Advice>() {};
+		
+		ResponseEntity<Advice> respEntity = restTemplate.exchange(reqUrl, HttpMethod.GET, null, respType);
+		
+		Advice theAdvice = respEntity.getBody();
+		
+		return theAdvice;
 	}
 }
